@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map background-color="#FFF">
+
+
+<Style name="roads_big">
+  <Rule>
+    <LineSymbolizer stroke="red" stroke-width="1" />
+  </Rule>
+</Style>
+
+<Style name="roads_middle">
+  <Rule>
+    <LineSymbolizer stroke="orange" stroke-width="0.5" />
+  </Rule>
+</Style>
+
+<Style name="roads_little">
+  <Rule>
+    <LineSymbolizer stroke="grey" stroke-width="0.2" />
+  </Rule>
+</Style>
+
+<Style name="trains">
+  <Rule>
+    <LineSymbolizer stroke="purple" stroke-width="1" />
+  </Rule>
+</Style>
+
+<Style name="planes">
+  <Rule>
+    <LineSymbolizer stroke="purple" stroke-width="1" />
+  </Rule>
+</Style>
+
+<Style name="roads_forgot">
+  <Rule>
+    <LineSymbolizer stroke="blue" stroke-width="0.2" />
+  </Rule>
+</Style>
+
+<Style name="buildings">
+  <Rule>
+      	<PolygonSymbolizer fill="#4eaa2f"/>
+  </Rule>
+</Style>
+
+<Style name="dark_green">
+  <Rule>
+      	<PolygonSymbolizer fill="blue"/>
+  </Rule>
+</Style>
+
+<Style name="tree_row">
+  <Rule>
+    <LineSymbolizer stroke="red" stroke-width="5" />
+  </Rule>
+</Style>
+
+<Style name="light_green">
+  <Rule>
+      	<PolygonSymbolizer fill="blue"/>
+  </Rule>
+</Style>
+
+<Style name="beach">
+  <Rule>
+      	<PolygonSymbolizer fill="yellow"/>
+  </Rule>
+</Style>
+
+<Style name="bridge">
+  <Rule>
+      	<PolygonSymbolizer fill="grey"/>
+  </Rule>
+</Style>
+
+<Style name="pavement">
+  <Rule>
+      	<PolygonSymbolizer fill="grey"/>
+  </Rule>
+</Style>
+
+<Style name="water_land">
+  <Rule>
+      	<PolygonSymbolizer fill="red"/>
+  </Rule>
+</Style>
+
+<Style name="river_big">
+  <Rule>
+    <LineSymbolizer stroke="blue" stroke-width="1" />
+  </Rule>
+</Style>
+
+<Style name="river_little">
+  <Rule>
+    <LineSymbolizer stroke="blue" stroke-width="0.5" />
+  </Rule>
+</Style>
+
+<Style name="water">
+  <Rule>
+      	<PolygonSymbolizer fill="blue"/>
+  </Rule>
+</Style>
+
+<Layer name="roads_big" status="on">
+  <StyleName>roads_big</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway='primary' OR
+       highway='motorway' OR
+       highway='trunk' OR
+       highway='secondary' OR
+       highway='tertiary' OR
+       highway='motorway_link' OR
+       highway='trunk_link' OR
+       highway='primary_link' OR
+       highway='secondary_link' OR
+       highway='tertiary_link' OR
+       man_made='pier' OR
+       highway='taxiway'
+       ) as roads_big
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="roads_middle" status="on">
+  <StyleName>roads_middle</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway='unclassified' OR
+       highway='residential' OR
+       highway='service' OR
+       highway='living_street' OR
+       highway='track' OR
+       highway='service'
+       ) as roads_middle
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="roads_little" status="on">
+  <StyleName>roads_little</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway='path' OR
+       highway='footway' OR
+       highway='pedestrian' OR
+       highway='steps' OR
+       highway='bridleway' OR
+       highway='service'
+       ) as roads_little
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="trains" status="on">
+  <StyleName>trains</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway='rail') as trains
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="planes" status="on">
+  <StyleName>planes</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway='runway') as planes
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+  
+<Layer name="roads_forgot" status="off">
+  <StyleName>roads_forgot</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where highway is not null
+       ) as roads_forgot
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>  
+  
+  
+<Layer name="buildings" status="on">
+  <StyleName>buildings</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way from planet_osm_polygon where building is not null) as building
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+
+<Layer name="dark_green" status="on">
+  <StyleName>dark_green</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where landuse='cemetery' OR
+       landuse='vineyard' OR
+       landuse='village_green' OR
+       landuse='plant_nursery' OR
+       landuse='forest' OR
+       landuse='allotments' OR  
+       boundary='national_park' OR
+       leisure='nature_reserve' OR
+       leisure='pitch' OR   
+       leisure='golf_course' OR     
+       leisure='sports_centre' OR
+       "natural"='wood'
+       ) as dark_green
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="light_green" status="on">
+  <StyleName>light_green</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where leisure='park' OR
+       landuse='grass' OR
+       leisure='stadium' OR
+       leisure='playground' OR
+       leisure='garden' OR
+       leisure='track' OR  
+       landuse='meadow' OR
+       landuse='farmland' OR
+       tourism='camp_site' OR
+       landuse='orchard' OR  
+	"natural"='scrub' OR
+	"natural"='grassland' OR
+       landuse='farmland'
+       ) as light_green
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="beach" status="on">
+  <StyleName>beach</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where "natural"='beach'
+       ) as beach
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="tree_row" status="off">
+  <StyleName>tree_row</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_line 
+       where "natural"='tree_row'
+       ) as tree_row
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer> 
+
+<Layer name="water_land" status="on">
+  <StyleName>water_land</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where waterway='riverbank' OR
+       waterway='stream' OR
+       landuse='basin' OR
+       landuse='reservoir' OR
+       "natural"='wetland' OR
+       "natural"='water' OR  
+       leisure='swimming_pool' OR
+       water='river'
+       ) as water_land
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="bridge" status="on">
+  <StyleName>bridge</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where man_made='bridge' OR
+       man_made='pier'
+       ) as bridge
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="pavement" status="on">
+  <StyleName>pavement</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select * 
+       from planet_osm_polygon 
+       where highway='pedestrian' OR
+       amenity='parking'
+       ) as pavement
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="river_big" status="on">
+  <StyleName>river_big</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where waterway='river' OR
+       waterway='canal' OR
+       waterway='drain') as river_big
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="river_little" status="on">
+  <StyleName>river_little</StyleName>
+  <Datasource>
+    <Parameter name="table">
+      (select way 
+       from planet_osm_line 
+       where waterway='stream') as river_little
+    </Parameter>
+    <Parameter name="type">postgis</Parameter>
+    <Parameter name="port">5432</Parameter>
+    <Parameter name="user">postgres</Parameter>
+    <Parameter name="dbname">gis</Parameter>
+  </Datasource>
+</Layer>
+
+<Layer name="water" status="on">
+    <StyleName>water</StyleName>
+    <Datasource>
+      <Parameter name="file">/home/rgerard/Desktop/shp/water/water_polygons.shp</Parameter>
+      <Parameter name="type">shape</Parameter>
+    </Datasource>
+  </Layer>
+
+</Map>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="roads_little">
+	  <Rule>
+	    <LineSymbolizer stroke="grey" stroke-width="0.3" />
+	  </Rule>
+	</Style>
+
+	<Layer name="roads_little" status="on">
+	  <StyleName>roads_little</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select way 
+	       from planet_osm_line 
+	       where highway='path' OR
+	       highway='footway' OR
+	       highway='pedestrian' OR
+	       highway='steps' OR
+	       highway='bridleway' OR
+	       highway='service'
+	       ) as roads_little
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

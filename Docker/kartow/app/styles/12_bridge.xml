@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="bridge">
+	  <Rule>
+	      	<PolygonSymbolizer fill="grey"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="bridge" status="on">
+	  <StyleName>bridge</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select * 
+	       from planet_osm_polygon 
+	       where man_made='bridge' OR
+	       man_made='pier'
+	       ) as bridge
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

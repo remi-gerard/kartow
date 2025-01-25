@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="river_big">
+	  <Rule>
+	    <LineSymbolizer stroke="blue" stroke-width="1" />
+	  </Rule>
+	</Style>
+
+	<Layer name="river_big" status="on">
+	  <StyleName>river_big</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select way 
+	       from planet_osm_line 
+	       where waterway='river' OR
+	       waterway='canal' OR
+	       waterway='drain') as river_big
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

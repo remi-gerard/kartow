@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="dark_green">
+	  <Rule>
+	      	<PolygonSymbolizer fill="blue"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="dark_green" status="on">
+	  <StyleName>dark_green</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select * 
+	       from planet_osm_polygon 
+	       where landuse='cemetery' OR
+	       landuse='vineyard' OR
+	       landuse='village_green' OR
+	       landuse='plant_nursery' OR
+	       landuse='forest' OR
+	       landuse='allotments' OR  
+	       boundary='national_park' OR
+	       leisure='nature_reserve' OR
+	       leisure='pitch' OR   
+	       leisure='golf_course' OR     
+	       leisure='sports_centre' OR
+	       "natural"='wood'
+	       ) as dark_green
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

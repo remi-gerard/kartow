@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="pavement">
+	  <Rule>
+	      	<PolygonSymbolizer fill="grey"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="pavement" status="on">
+	  <StyleName>pavement</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select * 
+	       from planet_osm_polygon 
+	       where highway='pedestrian' OR
+	       amenity='parking'
+	       ) as pavement
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+
+</Map>

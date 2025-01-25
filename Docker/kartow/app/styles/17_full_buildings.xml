@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="full_buildings">
+	  <Rule>
+	      	<PolygonSymbolizer fill="green"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="full_buildings" status="on">
+	  <StyleName>full_buildings</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select way from planet_osm_polygon where building is not null) as building
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+	
+</Map>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="roads_big">
+	  <Rule>
+	    <LineSymbolizer stroke="grey" stroke-width="1" />
+	  </Rule>
+	</Style>
+
+	<Layer name="roads_big" status="on">
+	  <StyleName>roads_big</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select way 
+	       from planet_osm_line 
+	       where highway='primary' OR
+	       highway='motorway' OR
+	       highway='trunk' OR
+	       highway='secondary' OR
+	       highway='tertiary' OR
+	       highway='motorway_link' OR
+	       highway='trunk_link' OR
+	       highway='primary_link' OR
+	       highway='secondary_link' OR
+	       highway='tertiary_link' OR
+	       man_made='pier' OR
+	       highway='taxiway'
+	       ) as roads_big
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

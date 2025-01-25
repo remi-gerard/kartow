@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="beach">
+	  <Rule>
+	      	<PolygonSymbolizer fill="yellow"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="beach" status="on">
+	  <StyleName>beach</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select * 
+	       from planet_osm_polygon 
+	       where "natural"='beach'
+	       ) as beach
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+</Map>

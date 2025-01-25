@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="buildings">
+	  <Rule>
+	      	<PolygonSymbolizer fill="red"/>
+	  </Rule>
+	</Style>
+
+<!--
+
+	<Layer name="buildings" status="on">
+	  <StyleName>buildings</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select way from planet_osm_polygon where building is not null) as building
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+
+
+-->
+
+
+	<Layer name="buildings" status="on">
+	  <StyleName>buildings</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (SELECT planet_osm_polygon.way
+ FROM planet_osm_polygon, (SELECT way FROM public.planet_osm_polygon where boundary='administrative' and name ='Le Pontet') as city
+ WHERE st_contains (city.way, planet_osm_polygon.way) = 't' AND planet_osm_polygon.building is not null) as building
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+	
+</Map>

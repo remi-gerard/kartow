@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE Map>
+
+<Map>
+	<Style name="water_land">
+	  <Rule>
+	      	<PolygonSymbolizer fill="red"/>
+	  </Rule>
+	</Style>
+
+	<Layer name="water_land" status="on">
+	  <StyleName>water_land</StyleName>
+	  <Datasource>
+	    <Parameter name="table">
+	      (select * 
+	       from planet_osm_polygon 
+	       where waterway='riverbank' OR
+	       waterway='stream' OR
+	       landuse='basin' OR
+	       landuse='reservoir' OR
+	       "natural"='wetland' OR
+	       "natural"='water' OR  
+	       leisure='swimming_pool' OR
+	       water='river'
+	       ) as water_land
+	    </Parameter>
+	    <Parameter name="type">postgis</Parameter>
+	    <Parameter name="port">5432</Parameter>
+	    <Parameter name="user">postgres</Parameter>
+	    <Parameter name="dbname">gis</Parameter>
+	  </Datasource>
+	</Layer>
+
+</Map>
