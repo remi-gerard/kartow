@@ -2,7 +2,20 @@
 
 ## Docker
 
-### db
+### Lancer la stack Docker Compose
+
+Lancer les images (-d : detached)
+Rebuild les images
+```bash
+docker-compose up -d
+```
+
+Rebuild les images
+```bash
+docker-compose up --build
+```
+
+### Docker db
 
 #### Récupération des données
 ```bash
