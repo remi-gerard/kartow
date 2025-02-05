@@ -3,17 +3,7 @@ import cairo
 
 from mapnik import Coord, Box2d
 
-# Le Pontet : wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=4.82,43.94,4.9,43.99] -O data.osm / Projection 536560 5456162 545466 5463895
-# Le Pontet Mieux cadré : https://lz4.overpass-api.de/api/xapi_meta?*[bbox=4.82,43.94,4.9,44.01] -O / Projection 536560 5456162 545466 5466990
-# Le Pontet LinkedIn : wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=4.7,43.94,5.03,44.01] -O data.osm
-# Projection 523202 5456162 559937 5466990
-# Avignon : wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=4.7843.92,4.86,43.96] -O data.osm / Projection 532107 5453070 541013 5459254
 
-# Stockholm : wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=17.96,59.24,18.18,59.39] -O data.osm / Projection 1999298 8232442 2023788 8265163
-
-
-# sudo -u postgres -i
-# osm2pgsql -m -d gis /home/rgerard/Desktop/osm/data.osm
 bbox = Box2d(1999298,8232442,2023788,8265163)
 
 width = 1600
@@ -139,7 +129,7 @@ style_99 = './styles/99_roads_forgot.xml'
 output_99 = '/home/rgerard/Desktop/output/99_roads_forgot.svg'
 generate_svg(style_99, output_99, width, height, bbox)
 
-##################### SAMPLE ##################### 
+##################### SAMPLE #####################
 
 output = '/home/rgerard/Desktop/output/sample.png'
 map = mapnik.Map(width, height)
@@ -164,5 +154,3 @@ mapnik.load_map(map, style_18)
 
 map.zoom_to_box(bbox)
 mapnik.render_to_file(map, output)
-
-

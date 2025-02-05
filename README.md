@@ -1,38 +1,27 @@
 # Kartow
 
-## Docker
+## Lancement du projet
 
-### Lancer la stack Docker Compose
+Dans le répertoire Docker
 
-Lancer les images (-d : detached)
-Rebuild les images
-```bash
-docker-compose up -d
-```
-
-Rebuild les images
+Build des images db et kartow
 ```bash
 docker-compose up --build
 ```
 
-### Docker db
-
-#### Récupération des données
+### Récupération et injection des données dans le conteneur db
 ```bash
+docker ps
 docker exec -u root -it xxxxxxxxx sh
-wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=17.96,59.24,18.18,59.39] -O data.osm
-exit
-```
-#### Injection des données
-```bash
-docker exec -u postgres -it xxxxxxxxx sh
+wget https://lz4.overpass-api.de/api/xapi_meta?*[bbox=4.77,43.96,4.79,43.97] -O data.osm
+su postgres
 createuser osmuser
-psql -U postgres
 createdb --encoding=UTF8 --owner=osmuser osm
-exit
 psql osm --command='CREATE EXTENSION postgis;';
 psql osm --command='CREATE EXTENSION hstore;';
 osm2pgsql -m -d osm data.osm
+exit
+rm -f data.osm
 ```
 
 #### Création des conteneurs
