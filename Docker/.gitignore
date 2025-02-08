@@ -2,3 +2,5 @@
 *.osm
 *.shp
 *.DS_Store
+*.svg
+*.png
