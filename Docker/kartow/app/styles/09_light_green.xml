@@ -12,27 +12,29 @@
 	  <StyleName>light_green</StyleName>
 	  <Datasource>
 	    <Parameter name="table">
-	      (select * 
-	       from planet_osm_polygon 
+	      (select *
+	       from planet_osm_polygon
 	       where leisure='park' OR
 	       landuse='grass' OR
 	       leisure='stadium' OR
 	       leisure='playground' OR
 	       leisure='garden' OR
-	       leisure='track' OR  
+	       leisure='track' OR
 	       landuse='meadow' OR
 	       landuse='farmland' OR
 	       tourism='camp_site' OR
-	       landuse='orchard' OR  
+	       landuse='orchard' OR
 		"natural"='scrub' OR
 		"natural"='grassland' OR
 	       landuse='farmland'
 	       ) as light_green
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
 	</Layer>
 </Map>

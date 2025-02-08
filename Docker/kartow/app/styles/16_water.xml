@@ -11,7 +11,7 @@
 	<Layer name="water" status="on">
 	    <StyleName>water</StyleName>
 	    <Datasource>
-	      <Parameter name="file">/home/rgerard/Desktop/shp/water/water_polygons.shp</Parameter>
+	      <Parameter name="file">./ressources/water_polygons.shp</Parameter>
 	      <Parameter name="type">shape</Parameter>
 	    </Datasource>
 	</Layer>

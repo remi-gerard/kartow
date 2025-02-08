@@ -12,15 +12,17 @@
 	  <StyleName>roads_forgot</StyleName>
 	  <Datasource>
 	    <Parameter name="table">
-	      (select way 
-	       from planet_osm_line 
+	      (select way
+	       from planet_osm_line
 	       where highway is not null
 	       ) as roads_forgot
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
-	</Layer>  
+	</Layer>
 </Map>

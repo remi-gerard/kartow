@@ -12,22 +12,24 @@
 	  <StyleName>water_land</StyleName>
 	  <Datasource>
 	    <Parameter name="table">
-	      (select * 
-	       from planet_osm_polygon 
+	      (select *
+	       from planet_osm_polygon
 	       where waterway='riverbank' OR
 	       waterway='stream' OR
 	       landuse='basin' OR
 	       landuse='reservoir' OR
 	       "natural"='wetland' OR
-	       "natural"='water' OR  
+	       "natural"='water' OR
 	       leisure='swimming_pool' OR
 	       water='river'
 	       ) as water_land
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
 	</Layer>
 

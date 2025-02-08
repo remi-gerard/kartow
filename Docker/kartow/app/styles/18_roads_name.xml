@@ -8,13 +8,13 @@
       </TextSymbolizer>
     		</Rule>
 	</Style>
-	
+
 	<Layer name="roads_name" status="on">
 	  <StyleName>roads_name</StyleName>
 	  <Datasource>
 	    <Parameter name="table">
 	      (select name as street, way
-	       from planet_osm_line 
+	       from planet_osm_line
 	       where highway='primary' OR
 	       highway='motorway' OR
 	       highway='trunk' OR
@@ -29,11 +29,13 @@
 	       highway='taxiway'
 	       ) as roads_name
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
 	</Layer>
- 
+
 </Map>

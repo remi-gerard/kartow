@@ -35,11 +35,13 @@
  FROM planet_osm_polygon, (SELECT way FROM public.planet_osm_polygon where boundary='administrative' and name ='Le Pontet') as city
  WHERE st_contains (city.way, planet_osm_polygon.way) = 't' AND planet_osm_polygon.building is not null) as building
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
 	</Layer>
-	
+
 </Map>

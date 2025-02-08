@@ -12,16 +12,18 @@
 	  <StyleName>pavement</StyleName>
 	  <Datasource>
 	    <Parameter name="table">
-	      (select * 
-	       from planet_osm_polygon 
+	      (select *
+	       from planet_osm_polygon
 	       where highway='pedestrian' OR
 	       amenity='parking'
 	       ) as pavement
 	    </Parameter>
-	    <Parameter name="type">postgis</Parameter>
+			<Parameter name="type">postgis</Parameter>
+			<Parameter name="host">db</Parameter>
 	    <Parameter name="port">5432</Parameter>
 	    <Parameter name="user">postgres</Parameter>
-	    <Parameter name="dbname">gis</Parameter>
+			<Parameter name="password">secret</Parameter>
+	    <Parameter name="dbname">osm</Parameter>
 	  </Datasource>
 	</Layer>
 

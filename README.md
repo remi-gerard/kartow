@@ -9,6 +9,11 @@ Build des images db et kartow
 docker-compose up --build
 ```
 
+### Récupération de la bbox
+
+http://tools.geofabrik.de/calc/
+
+
 ### Récupération et injection des données dans le conteneur db
 ```bash
 docker ps
@@ -32,6 +37,18 @@ docker build -t db .
 
 L'argument -t permet de donner un nom à votre image Docker.
 Le . est le répertoire où se trouve le Dockerfile
+
+#### Commandes Postgres
+
+Sélectionner la base de données
+```bash
+psql -d db
+```
+
+liste des bases de données
+```bash
+\dt
+```
 
 #### Lancement des conteneurs
 ```bash
