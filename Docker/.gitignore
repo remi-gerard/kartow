@@ -4,3 +4,7 @@
 *.DS_Store
 *.svg
 *.png
+*.cpg
+*.dbf
+*.prj
+*.shx
