@@ -1,8 +1,11 @@
 import  mapnik
 import cairo
-
+import xml.etree.ElementTree as ET
+import glob
+import os
 from mapnik import Coord, Box2d
 
+print('#### Starting generation ####')
 
 bbox = Box2d(530994,5459254,533220,5460801)
 
@@ -154,5 +157,59 @@ mapnik.load_map(map, style_18)
 
 map.zoom_to_box(bbox)
 mapnik.render_to_file(map, output)
+
+#### génération du fichier SVG global
+
+def superpose_svg_files(svg_file_paths, output_file_path):
+    # Charger le premier fichier SVG pour avoir la structure de base
+    base_tree = ET.parse(svg_file_paths[0])
+    base_root = base_tree.getroot()
+
+    # Itérer à partir du second fichier SVG
+    for file_path in svg_file_paths[1:]:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+
+        # Ajouter les enfants du SVG courant au SVG de base
+        for child in root:
+            base_root.append(child)
+
+    # Écrire le fichier SVG superposé
+    base_tree.write(output_file_path, encoding='utf-8', xml_declaration=True)
+
+
+def list_svg_files(directory):
+    # Utiliser glob pour récupérer tous les fichiers .svg dans le répertoire spécifié
+    svg_files = glob.glob(os.path.join(directory, "*.svg"))
+    return svg_files
+
+directory_path = "./output"
+
+def delete_files_starting_with_two_digits(directory):
+    # Créer un motif pour correspondre aux fichiers commençant par deux chiffres
+    pattern = os.path.join(directory, "[0-9][0-9]*")
+
+    # Récupérer la liste des fichiers correspondant au motif
+    files_to_delete = glob.glob(pattern)
+
+    # Supprimer chaque fichier correspondant
+    for file_path in files_to_delete:
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print(f"Deleted: {file_path}")
+
+svg_files = list_svg_files(directory_path)
+
+# Chemin du fichier SVG de sortie
+output_file = "./output/map.svg"
+
+# Superposer les fichiers SVG
+superpose_svg_files(svg_files, output_file)
+
+# Spécifiez le répertoire cible
+directory_path = "./output"
+
+# Supprimer les fichiers commençant par deux chiffres
+delete_files_starting_with_two_digits(directory_path)
 
 print('#### Generation completed ####')
